@@ -7,16 +7,20 @@
 
 int main() 
 {
+    // Number of threads that can be executed simultaneously by the hardware
+    int number_of_threads = std::thread::hardware_concurrency();
+
+    // Central component used for managing I/O operations
     boost::asio::io_context io_context;
 
     try 
     {
         // Create a Server instance, passing the io_context and the port you want to listen on (e.g., 8080).
         // Use a smart pointer
-        std::unique_ptr<Server> server = std::make_unique<Server>(io_context, 8080);
+        std::unique_ptr<Server> server = std::make_unique<Server>(io_context, number_of_threads, 8080);
 
-        // Start the server
-        server->start();
+        // Run the server
+        server->run();
 
         // Run the Boost.Asio io_context to handle asynchronous operations
         io_context.run();

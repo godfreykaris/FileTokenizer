@@ -1,19 +1,26 @@
 #include <iostream>
-
 #include "server.hpp"
 
-Server::Server(net::io_context& io_context, short port)
-    : acceptor_(io_context, tcp::endpoint(tcp::v4(), port)), socket_(io_context) {
-    }   
+// Constructor
+Server::Server(net::io_context& io_context, short number_of_threads, short port)
+    : acceptor_(io_context, tcp::endpoint(tcp::v4(), port)),
+      io_context_(io_context),
+      number_of_threads_(number_of_threads) 
+    {
+    }
 
+// Main server loop
 void Server::run()
 {
-   while (true) 
-   {
+    while (true) 
+    {
+        // Create a socket
+        tcp::socket socket_(io_context_);
+        // Accept incoming connection
         acceptor_.accept(socket_);
 
         // Handle the request
-        handle_request();
+        handle_request(socket_);
 
         // Close the socket
         boost::system::error_code ec;
@@ -26,21 +33,27 @@ void Server::run()
     }
 }
 
-void Server::handle_request() {
+// Handle incoming request
+void Server::handle_request(tcp::socket& socket_) {
+    // Read the request from the socket
     beast::flat_buffer buffer;
     http::request<http::dynamic_body> request;
     http::read(socket_, buffer, request);
 
+    // Prepare the response
     http::response<http::string_body> response;
 
+    // Check the request method and handle accordingly
     if (request.method() == http::verb::get) 
     {
         handle_get_request(request, response);
     } 
 
+    // Write the response to the socket
     http::write(socket_, response);
 }
 
+// Handle GET request
 void Server::handle_get_request(const http::request<http::dynamic_body>& request, http::response<http::string_body>& response) 
 {
     // Create a JSON response as a string
@@ -55,6 +68,7 @@ void Server::handle_get_request(const http::request<http::dynamic_body>& request
     response.prepare_payload();
 }
 
+// Destructor
 Server::~Server()
 {
     acceptor_.close();
