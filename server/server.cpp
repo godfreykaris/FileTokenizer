@@ -3,34 +3,51 @@
 
 // Constructor
 Server::Server(net::io_context& io_context, short number_of_threads, short port)
-    : acceptor_(io_context, tcp::endpoint(tcp::v4(), port)),
+    : port_(port),
       io_context_(io_context),
-      number_of_threads_(number_of_threads) 
+      number_of_threads_(number_of_threads), 
+      thread_pool_(number_of_threads)
     {
+
     }
 
 // Main server loop
 void Server::run()
 {
+    // Initialize the acceptor
+    tcp::acceptor acceptor_(io_context_, tcp::endpoint(tcp::v4(), port_));
     while (true) 
-    {
-        // Create a socket
-        tcp::socket socket_(io_context_);
+     {
+
+        // Create a socket for the connection
+        std::shared_ptr<tcp::socket> socket_ = std::make_shared<tcp::socket>(io_context_);
+    
         // Accept incoming connection
-        acceptor_.accept(socket_);
+        acceptor_.accept(*socket_);
 
-        // Handle the request
-        handle_request(socket_);
+        std::cout<<"\nConnection accepted\n";
 
-        // Close the socket
-        boost::system::error_code ec;
-        socket_.shutdown(tcp::socket::shutdown_send, ec);
-        socket_.close(ec);
-        if (ec)
-        {
-            std::cerr << "Error closing socket: " << ec.message() << std::endl;
-        }
+
+        thread_pool_.enqueue(
+            [this, socket_]
+            {
+                // Handle the request
+                handle_request(*socket_);
+
+                // Close the socket
+                boost::system::error_code ec;
+                socket_->shutdown(tcp::socket::shutdown_send, ec);
+                socket_->close(ec);
+                if (ec)
+                {
+                    std::cerr << "Error closing socket: " << ec.message() << std::endl;
+                }
+
+            }
+        );
+        
     }
+     
 }
 
 // Handle incoming request
@@ -66,10 +83,4 @@ void Server::handle_get_request(const http::request<http::dynamic_body>& request
     response.set(http::field::content_type, "application/json");
     response.body() = json_response;
     response.prepare_payload();
-}
-
-// Destructor
-Server::~Server()
-{
-    acceptor_.close();
 }
