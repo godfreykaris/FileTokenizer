@@ -2,6 +2,8 @@
 #include<nlohmann/json.hpp>
 #include "server.hpp"
 
+#include "../directory_iterator/directory_iterator.hpp"
+
 using json = nlohmann::json;
 
 // Constructor
@@ -125,8 +127,26 @@ json Server::process_post_request(const json& request_json)
 {
     // Process the request JSON here and generate a response JSON
     json response_json;
-    // ... process the request JSON and populate the response JSON ...
-    response_json["message"] = "Response to POST request: ";
+
+    std::unique_ptr<DirectoryIterator> directory_iterator = std::make_unique<DirectoryIterator>();
+
+    std::vector<std::string> extensions = {".md", ".sh", ".hpp", ".cpp"}; 
+    std::vector<std::string> file_names;
+    try 
+    {
+        file_names = directory_iterator->get_files("/home/godfreykaris/Documents/CVI/FileTokenizer", extensions);
+
+        response_json["file_names"] = file_names;
+        response_json["message"] = "Response to POST request.";
+    } 
+    catch (const std::runtime_error& ex) 
+    {
+        std::cerr << "Error: " << ex.what() << std::endl;
+
+        response_json["file_names"] = file_names;
+        response_json["message"] = "An error occured: " + std::string(ex.what());
+    }
+
 
     return response_json;
 }
