@@ -1,4 +1,0 @@
-Token~FilePath~LineNumber
-"$query = \"SELECT id, breed_name FROM apple_breeds WHERE (id=?)\";"~"/home/godfreykaris/Documents/CVI/FileTokenizer/test_files/php/process_edit_apple_breed.php"~42
-"$query = \"SELECT id, breed_name FROM apple_breeds WHERE (breed_name=?)\";"~"/home/godfreykaris/Documents/CVI/FileTokenizer/test_files/php/process_edit_apple_breed.php"~59
-"$query = \"UPDATE apple_breeds SET breed_name=? WHERE id=?;\";"~"/home/godfreykaris/Documents/CVI/FileTokenizer/test_files/php/process_edit_apple_breed.php"~74

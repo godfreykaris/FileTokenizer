@@ -1,3 +1,0 @@
-Token~FilePath~LineNumber
-"$query = \"SELECT email FROM users WHERE (email=?)\";"~"/home/godfreykaris/Documents/CVI/FileTokenizer/test_files/php/process_add_user.php"~47
-"$query = \"INSERT INTO users (id, name, email)\";"~"/home/godfreykaris/Documents/CVI/FileTokenizer/test_files/php/process_add_user.php"~62

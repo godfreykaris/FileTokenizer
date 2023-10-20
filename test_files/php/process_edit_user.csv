@@ -1,6 +1,0 @@
-Token~FilePath~LineNumber
-"$query = \"SELECT id, email FROM users WHERE (id=?)\";"~"/home/godfreykaris/Documents/CVI/FileTokenizer/test_files/php/process_edit_user.php"~54
-"$query = \"SELECT id, email FROM users WHERE (email=?)\";"~"/home/godfreykaris/Documents/CVI/FileTokenizer/test_files/php/process_edit_user.php"~71
-"$query = \"UPDATE users SET name = ?, email = ? WHERE id = ?;\";"~"/home/godfreykaris/Documents/CVI/FileTokenizer/test_files/php/process_edit_user.php"~86
-"// Update the email in the users register table"~"/home/godfreykaris/Documents/CVI/FileTokenizer/test_files/php/process_edit_user.php"~112
-"$query = \"UPDATE users_register SET  email = ? WHERE email = ?\";"~"/home/godfreykaris/Documents/CVI/FileTokenizer/test_files/php/process_edit_user.php"~114
