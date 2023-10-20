@@ -1,5 +1,4 @@
-#ifndef THREAD_POOL_H
-#define THREAD_POOL_H
+#pragma once
 
 #include <functional>
 #include <future>
@@ -41,4 +40,3 @@ class ThreadPool
     std::condition_variable conditional_variable_;  // Condition variable for coordinating threads
 };
 
-#endif
