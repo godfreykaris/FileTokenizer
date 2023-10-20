@@ -5,10 +5,12 @@ g++ -o app \
     app.cpp \
     threadpool/threadpool.cpp \
     directory_iterator/directory_iterator.cpp \
+    tokenizer/tokenizer.cpp \
     server/server.cpp \
     -I server \
     -I threadpool \
     -I directory_iterator \
+    -I tokenizer \
     -lboost_system \
     -lboost_thread \
     -lssl \

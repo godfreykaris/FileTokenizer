@@ -1,4 +1,3 @@
-// server.hpp
 #pragma once
 
 #include <boost/beast.hpp>

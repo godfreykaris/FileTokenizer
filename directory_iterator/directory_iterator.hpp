@@ -2,12 +2,19 @@
 
 #include <vector>
 #include <string>
+#include <memory>
 
-class DirectoryIterator {
-public:
-    DirectoryIterator() = default;
+#include "tokenizer/tokenizer.hpp"
 
-    std::vector<std::string> get_files(const std::string& directory_path,const std::vector<std::string>& extensions) const;
-    std::vector<std::string> get_directories(const std::string& directory_path) const;
 
+class DirectoryIterator 
+{
+    public:
+        DirectoryIterator();
+        ~DirectoryIterator() = default;
+
+        void process_files(const std::string& directory_path,const std::vector<std::string>& extensions) const;
+        void tokenize_and_write_to_csv(const std::string& file_path) const;
+
+        std::shared_ptr<Tokenizer> tokenizer_;
 };
