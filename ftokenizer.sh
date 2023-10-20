@@ -1,7 +1,19 @@
 #!/bin/bash
 
 # Compile the C++ program
-g++ -o app app.cpp threadpool/threadpool.cpp server/server.cpp -I server -I threadpool -lboost_system -lboost_thread -lssl -lcrypto  -pthread
+g++ -o app \
+    app.cpp \
+    threadpool/threadpool.cpp \
+    directory_iterator/directory_iterator.cpp \
+    server/server.cpp \
+    -I server \
+    -I threadpool \
+    -I directory_iterator \
+    -lboost_system \
+    -lboost_thread \
+    -lssl \
+    -lcrypto \
+    -pthread
 
 # Check if the compilation was successful
 if [ $? -eq 0 ]; then
