@@ -1,0 +1,2 @@
+Token~FilePath~LineNumber
+"$sql = \"SELECT * FROM users WHERE id = ?\";"~"/home/godfreykaris/Documents/CVI/FileTokenizer/test_files/php/edit_user.php"~23

@@ -128,22 +128,30 @@ json Server::process_post_request(const json& request_json)
     // Process the request JSON here and generate a response JSON
     json response_json;
 
-    std::unique_ptr<DirectoryIterator> directory_iterator = std::make_unique<DirectoryIterator>();
+    std::shared_ptr<DirectoryIterator> directory_iterator = std::make_shared<DirectoryIterator>();
 
-    std::vector<std::string> extensions = {".md", ".sh", ".hpp", ".cpp"}; 
-    std::vector<std::string> file_names;
+    std::vector<std::string> extensions = {".php"}; 
+    std::vector<std::string> file_paths;
     try 
-    {
-        file_names = directory_iterator->get_files("/home/godfreykaris/Documents/CVI/FileTokenizer", extensions);
+    {        
+        file_paths = directory_iterator->get_files("/home/godfreykaris/Documents/CVI/FileTokenizer/test_files", extensions);
 
-        response_json["file_names"] = file_names;
-        response_json["message"] = "Response to POST request.";
+        for (const std::string& file_path : file_paths) 
+        {
+           thread_pool_.enqueue(
+             [this, file_path = file_path, directory_iterator]
+             {
+                directory_iterator->tokenize_and_write_to_csv(file_path);
+             }
+           );
+        }
+
+        response_json["message"] = "Working...";
     } 
     catch (const std::runtime_error& ex) 
     {
         std::cerr << "Error: " << ex.what() << std::endl;
 
-        response_json["file_names"] = file_names;
         response_json["message"] = "An error occured: " + std::string(ex.what());
     }
 

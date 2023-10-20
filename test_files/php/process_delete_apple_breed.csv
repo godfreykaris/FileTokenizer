@@ -1,0 +1,3 @@
+Token~FilePath~LineNumber
+"$query = \"SELECT id  FROM apple_breeds WHERE (id=?)\";"~"/home/godfreykaris/Documents/CVI/FileTokenizer/test_files/php/process_delete_apple_breed.php"~33
+"$deleteQuery = \"DELETE FROM apple_breeds WHERE id=?\";"~"/home/godfreykaris/Documents/CVI/FileTokenizer/test_files/php/process_delete_apple_breed.php"~47

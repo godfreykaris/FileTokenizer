@@ -13,8 +13,11 @@ DirectoryIterator::DirectoryIterator()
     // Constructor
 }
 
-void DirectoryIterator::process_files(const std::string& directory_path, const std::vector<std::string>& extensions) const 
+std::vector<std::string> DirectoryIterator::get_files(const std::string& directory_path, const std::vector<std::string>& extensions) const 
 {
+    std::vector<std::string> files;
+
+
     if (!std::filesystem::exists(directory_path))
     {
         throw std::runtime_error("Directory does not exist: " + directory_path);
@@ -29,12 +32,13 @@ void DirectoryIterator::process_files(const std::string& directory_path, const s
                 std::string extension = entry.path().extension().string();
                 if (std::find(extensions.begin(), extensions.end(), extension) != extensions.end())
                 {
-                    tokenize_and_write_to_csv(entry.path().filename().string());
+                    files.push_back(entry.path());
                 }
             }
             else if (fs::is_directory(entry.path())) 
             {
-                process_files(entry.path().string(), extensions);
+                std::vector<std::string> sub_directory_files = get_files(entry.path().string(), extensions);
+                files.insert(files.end(), sub_directory_files.begin(), sub_directory_files.end());
             }
         }
     } 
@@ -43,6 +47,7 @@ void DirectoryIterator::process_files(const std::string& directory_path, const s
         std::cerr << "Filesystem error: " << ex.what() << std::endl;
     }
 
+    return files;
 }
 
 void DirectoryIterator::tokenize_and_write_to_csv(const std::string& file_path) const
