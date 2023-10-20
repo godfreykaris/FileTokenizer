@@ -1,5 +1,0 @@
-Token~FilePath~LineNumber
-"$query = \"SELECT id, email FROM users WHERE (id=?)\";"~"/home/godfreykaris/Documents/CVI/FileTokenizer/test_files/php/process_delete_user.php"~33
-"$query = \"SELECT * FROM users_register WHERE (email=?)\";"~"/home/godfreykaris/Documents/CVI/FileTokenizer/test_files/php/process_delete_user.php"~51
-"$deleteQuery = \"DELETE FROM users WHERE id = ?\";"~"/home/godfreykaris/Documents/CVI/FileTokenizer/test_files/php/process_delete_user.php"~73
-"$deleteQuery = \"DELETE FROM users_register WHERE email = ?\";"~"/home/godfreykaris/Documents/CVI/FileTokenizer/test_files/php/process_delete_user.php"~82

@@ -1,3 +1,0 @@
-Token~FilePath~LineNumber
-"$count_query = \"SELECT COUNT(*) AS total_records FROM apple_breeds\";"~"/home/godfreykaris/Documents/CVI/FileTokenizer/test_files/php/view_apple_breeds.php"~29
-"$sql = \"SELECT * FROM apple_breeds LIMIT ?, ?\";"~"/home/godfreykaris/Documents/CVI/FileTokenizer/test_files/php/view_apple_breeds.php"~41

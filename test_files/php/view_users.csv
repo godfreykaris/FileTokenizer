@@ -1,3 +1,0 @@
-Token~FilePath~LineNumber
-"$count_query = \"SELECT COUNT(*) AS total_records FROM users\";"~"/home/godfreykaris/Documents/CVI/FileTokenizer/test_files/php/view_users.php"~29
-"$sql = \"SELECT * FROM users LIMIT ?, ?\";"~"/home/godfreykaris/Documents/CVI/FileTokenizer/test_files/php/view_users.php"~41
