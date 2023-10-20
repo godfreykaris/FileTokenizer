@@ -1,0 +1,2 @@
+Token~FilePath~LineNumber
+"$sql = \"SELECT * FROM apple_breeds WHERE id = ?\";"~"/home/godfreykaris/Documents/CVI/FileTokenizer/test_files/php/edit_apple_breed.php"~22

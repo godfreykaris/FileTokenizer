@@ -1,0 +1,3 @@
+Token~FilePath~LineNumber
+"$query = \"SELECT id FROM apple_breeds WHERE (breed_name=?)\";"~"/home/godfreykaris/Documents/CVI/FileTokenizer/test_files/php/process_add_apple_breed.php"~32
+"$query = \"INSERT INTO apple_breeds (id, breed_name)\";"~"/home/godfreykaris/Documents/CVI/FileTokenizer/test_files/php/process_add_apple_breed.php"~47

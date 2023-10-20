@@ -74,6 +74,7 @@
         "forward_list": "cpp",
         "fstream": "cpp",
         "cfenv": "cpp",
-        "valarray": "cpp"
+        "valarray": "cpp",
+        "regex": "cpp"
     }
 }
