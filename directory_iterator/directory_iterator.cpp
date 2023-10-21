@@ -50,7 +50,7 @@ std::vector<std::string> DirectoryIterator::get_files(const std::string& directo
     return files;
 }
 
-void DirectoryIterator::tokenize_and_write_to_csv(const std::string& file_path) const
+std::vector<TokenInfo> DirectoryIterator::tokenize_and_write_to_csv(const std::string& file_path) const
 {
-    tokenizer_->tokenize(file_path);
+    return tokenizer_->tokenize(file_path);
 }

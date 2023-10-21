@@ -17,7 +17,7 @@ class Tokenizer
         Tokenizer() = default;
         ~Tokenizer() = default;
 
-        void tokenize(const std::string& file_path);
+        std::vector<TokenInfo> tokenize(const std::string& file_path);
 
     private:
         bool is_sql_code(const std::string& line);

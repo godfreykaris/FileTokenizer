@@ -14,6 +14,7 @@ g++ -o app \
     -lboost_system \
     -lboost_thread \
     -lssl \
+    -lcurl \
     -lcrypto \
     -pthread
 

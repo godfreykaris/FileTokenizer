@@ -6,7 +6,7 @@
 #include <iostream>
 #include <boost/algorithm/string.hpp>
 
-void Tokenizer::tokenize(const std::string& file_path) 
+std::vector<TokenInfo> Tokenizer::tokenize(const std::string& file_path) 
 {
     std::vector<TokenInfo> tokens;
 
@@ -35,6 +35,7 @@ void Tokenizer::tokenize(const std::string& file_path)
     if(tokens.size())
         write_to_csv(tokens, file_path);
 
+    return tokens;
 }
 
 bool Tokenizer::is_sql_code(const std::string& line) 

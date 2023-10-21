@@ -17,7 +17,7 @@ int main()
     {
         // Create a Server instance, passing the io_context and the port you want to listen on (e.g., 8080).
         // Use a smart pointer
-        std::unique_ptr<Server> server = std::make_unique<Server>(io_context, number_of_threads, 8080);
+        std::unique_ptr<Server> server = std::make_unique<Server>(io_context, number_of_threads, 8080, "http://localhost:5000/api/task");
 
         // Run the server
         server->run();
