@@ -40,7 +40,8 @@ ThreadPool::ThreadPool(size_t number_of_threads) : stop(false)
     }
 }
 
-void ThreadPool::enqueue(std::function<void()> task) {
+void ThreadPool::enqueue(std::function<void()> task) 
+{
     {
         std::unique_lock lock(mutex_);
         if (stop) {

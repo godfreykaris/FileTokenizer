@@ -2,6 +2,8 @@
 #include <filesystem>
 #include <iostream>
 #include <algorithm>
+#include <fstream>
+
 
 #include "directory_iterator.hpp"
 
@@ -25,14 +27,38 @@ std::vector<std::string> DirectoryIterator::get_files(const std::string& directo
 
     try 
     {
+        std::filesystem::path path = std::filesystem::path(std::string("/home/godfreykaris/Documents/CVI/AI-CVI/combined_dataset.csv"));
+
+        std::ofstream file1(path);
+
+        if (!file1.is_open()) 
+        {
+            std::cout << "Failed to open file: " << path << std::endl;
+            return files;
+        }
+
         for (const auto& entry : fs::directory_iterator(directory_path)) 
         {
             if (fs::is_regular_file(entry.path())) 
             {
-                std::string extension = entry.path().extension().string();
-                if (std::find(extensions.begin(), extensions.end(), extension) != extensions.end())
+                // std::string extension = entry.path().extension().string();
+                // if (std::find(extensions.begin(), extensions.end(), extension) != extensions.end())
+                // {
+                //     files.push_back(entry.path());
+                // }
+
+                std::ifstream file(entry.path().string());
+                std::string line;
+
+        
+                int added_lines = 0;
+
+                while (std::getline(file, line)) 
                 {
-                    files.push_back(entry.path());
+                    if(added_lines)
+                        file1 << line << std::endl;
+                    
+                    added_lines++;
                 }
             }
             else if (fs::is_directory(entry.path())) 

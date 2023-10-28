@@ -187,12 +187,12 @@ json Server::process_post_request(const json& request_json)
                 
                         processing_complete_response["output"] = path.string();
 
-                         bool success = send_post_request(ai_microservice_url_, processing_complete_response);
+                        //  bool success = send_post_request(ai_microservice_url_, processing_complete_response);
 
-                        if (!success)
-                        {
-                            std::cerr << "Failed to send POST request." << std::endl;
-                        }
+                        // if (!success)
+                        // {
+                        //     std::cerr << "Failed to send POST request." << std::endl;
+                        // }
                     }
                     
                 }
@@ -250,7 +250,7 @@ bool Server::send_post_request(const std::string& target_url, const json& post_d
             else 
             {
                 // Print error message and retry after a delay
-                std::cerr << "Attempt " << attempt << " failed: " << curl_easy_strerror(res) <<"\nRetrying" << std::endl;
+                std::cerr << "Attempt " << attempt << " failed: " << curl_easy_strerror(res) <<"\nRetrying..." << std::endl;
                 std::this_thread::sleep_for(std::chrono::seconds(1)); // Delay before the next attempt
             }
         }
